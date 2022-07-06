@@ -34,7 +34,6 @@ class TextFormFieldWidget extends StatelessWidget {
                       color: Colors.grey[400],
                       fontSize: 16,
                       fontWeight: FontWeight.w500),
-                  fillColor: Colors.grey[280],
                   filled: true,
                   contentPadding: const EdgeInsets.symmetric(
                       vertical: 8.0, horizontal: 16.0),

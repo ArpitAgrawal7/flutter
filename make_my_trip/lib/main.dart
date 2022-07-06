@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:make_my_trip/pages/hotel_list_page.dart';
 import 'package:make_my_trip/pages/login_page.dart';
 
 void main() {
@@ -13,6 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: LoginPage(),
+      // HotelListPage(),
     );
   }
 }
