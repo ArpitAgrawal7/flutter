@@ -9,6 +9,7 @@ class LoginPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -36,6 +37,7 @@ class LoginPage extends StatelessWidget {
                   TextFormFieldWidget(
                     hintText: "Email",
                     obSecure: false,
+                    controller: email,
                   ),
                   BlocBuilder<LoginCubit, LoginState>(
                     builder: (context, state) {
@@ -52,6 +54,7 @@ class LoginPage extends StatelessWidget {
                             },
                           ),
                           obSecure: state.obSecure,
+                          controller: password,
                         );
                       } else {
                         return TextFormFieldWidget(
@@ -64,6 +67,7 @@ class LoginPage extends StatelessWidget {
                             },
                           ),
                           obSecure: true,
+                          controller: password,
                         );
                       }
                     },

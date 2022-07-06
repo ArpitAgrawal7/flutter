@@ -6,11 +6,15 @@ class TextFormFieldWidget extends StatelessWidget {
   final String hintText;
   final IconButton? iconButton;
   final bool obSecure;
+  final TextEditingController controller;
 
-  TextFormFieldWidget({Key? key, required this.hintText, this.iconButton, required this.obSecure})
+  const TextFormFieldWidget(
+      {Key? key,
+      required this.hintText,
+      this.iconButton,
+      required this.obSecure,
+      required this.controller})
       : super(key: key);
-  final TextEditingController email = TextEditingController();
-  final TextEditingController password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +25,8 @@ class TextFormFieldWidget extends StatelessWidget {
         child: BlocBuilder<LoginCubit, LoginState>(
           builder: (context, state) {
             return TextFormField(
-              obscureText: false,
-              controller: hintText == "Email" ? email : password,
+              obscureText: obSecure,
+              controller: controller,
               decoration: InputDecoration(
                   hintText: hintText,
                   suffixIcon: iconButton,
@@ -32,8 +36,8 @@ class TextFormFieldWidget extends StatelessWidget {
                       fontWeight: FontWeight.w500),
                   fillColor: Colors.grey[280],
                   filled: true,
-                  contentPadding:
-                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                  contentPadding: const EdgeInsets.symmetric(
+                      vertical: 8.0, horizontal: 16.0),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
                     borderSide: BorderSide.none,
