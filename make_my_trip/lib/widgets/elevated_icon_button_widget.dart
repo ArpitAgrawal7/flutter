@@ -1,23 +1,29 @@
 import 'package:flutter/material.dart';
 
-class ElevatedIconButtonView extends StatelessWidget {
-  const ElevatedIconButtonView(
-      {Key? key, required this.action, required this.onTap, required this.logo})
+class LoginElevatedButtonWidget extends StatelessWidget {
+  const LoginElevatedButtonWidget(
+      {Key? key,
+      required this.child,
+      required this.onTap,
+      required this.height,
+      required this.width,
+      required this.buttonColor})
       : super(key: key);
-  final String action;
+  final Widget child;
   final VoidCallback onTap;
-  final Icon logo;
+  final double height;
+  final double width;
+  final Color buttonColor;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 150,
-      height: 36,
-      child: ElevatedButton.icon(
+      height: height,
+      width: width,
+      child: ElevatedButton(
         onPressed: onTap,
-        icon: logo,
-        label: Text(action),
         style: ElevatedButton.styleFrom(
+          primary: buttonColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.0),
           ),
@@ -26,6 +32,7 @@ class ElevatedIconButtonView extends StatelessWidget {
             fontWeight: FontWeight.w500,
           ),
         ),
+        child: child,
       ),
     );
   }

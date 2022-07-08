@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:make_my_trip/cubit/login_cubit.dart';
 import 'package:make_my_trip/widgets/elevated_icon_button_widget.dart';
 import 'package:make_my_trip/widgets/text_form_field_widget.dart';
@@ -36,7 +37,7 @@ class LoginPage extends StatelessWidget {
                 Form(
                   key: _formKey,
                   child: Column(children: [
-                    TextFormFieldWidget(
+                    LoginTextFormFieldWidget(
                       hintText: "Email",
                       obSecure: false,
                       controller: email,
@@ -44,7 +45,7 @@ class LoginPage extends StatelessWidget {
                     BlocBuilder<LoginCubit, LoginState>(
                       builder: (context, state) {
                         if (state is ChangeState) {
-                          return TextFormFieldWidget(
+                          return LoginTextFormFieldWidget(
                             hintText: "Password",
                             iconButton: IconButton(
                               icon: state.obSecure == true
@@ -59,7 +60,7 @@ class LoginPage extends StatelessWidget {
                             controller: password,
                           );
                         } else {
-                          return TextFormFieldWidget(
+                          return LoginTextFormFieldWidget(
                             hintText: "Password",
                             iconButton: IconButton(
                               icon: const Icon(Icons.visibility_off),
@@ -90,33 +91,22 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 12.0, horizontal: 28.0),
-                      child: SizedBox(
-                        height: 40,
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            textStyle: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 12.0, horizontal: 28.0),
+                        child: LoginElevatedButtonWidget(
+                          height: 40,
+                          onTap: () {},
+                          width: double.infinity,
+                          buttonColor: Colors.blue,
                           child: const Text("Login"),
-                        ),
-                      ),
-                    ),
+                        )),
                   ]),
                 ),
                 Row(children: const [
                   Expanded(
                       child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Divider(thickness: 1.5, color: Colors.black54),
+                    padding: EdgeInsets.only(left: 32.0, right: 8.0),
+                    child: Divider(thickness: 0.5, color: Colors.black54),
                   )),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 24.0),
@@ -130,9 +120,9 @@ class LoginPage extends StatelessWidget {
                   ),
                   Expanded(
                       child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8.0),
+                    padding: EdgeInsets.only(left: 8.0, right: 32.0),
                     child: Divider(
-                      thickness: 1.5,
+                      thickness: 0.5,
                       color: Colors.black54,
                     ),
                   )),
@@ -140,15 +130,41 @@ class LoginPage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    ElevatedIconButtonView(
-                      action: 'Facebook',
+                    LoginElevatedButtonWidget(
+                        onTap: () {},
+                        height: 36,
+                        width: 150,
+                        buttonColor: const Color(0xFF4267B2),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            const Text("Facebook"),
+                            SvgPicture.asset(
+                              "assets/images/facebook.svg",
+                              height: 20,
+                              width: 20,
+                            ),
+                          ],
+                        )),
+                    LoginElevatedButtonWidget(
                       onTap: () {},
-                      logo: const Icon(Icons.facebook),
-                    ),
-                    ElevatedIconButtonView(
-                      action: 'Google',
-                      onTap: () {},
-                      logo: const Icon(Icons.facebook),
+                      height: 36,
+                      width: 150,
+                      buttonColor: const Color(0xFFEEEEEE),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          const Text(
+                            "Google",
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          SvgPicture.asset(
+                            "assets/images/google.svg",
+                            height: 20,
+                            width: 20,
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),

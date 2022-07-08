@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:make_my_trip/pages/hotel_list_page.dart';
 import 'package:make_my_trip/pages/login_page.dart';
+import 'package:make_my_trip/pages/room_list_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,8 +14,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginPage(),
-      // HotelListPage(),
+      home:
+      // LoginPage(),
+      //  HotelListPage(),
+       RoomListPage(),
     );
   }
 }
