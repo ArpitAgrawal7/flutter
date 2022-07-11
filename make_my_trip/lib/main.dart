@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:make_my_trip/pages/hotel_list_page.dart';
 import 'package:make_my_trip/pages/login_page.dart';
 import 'package:make_my_trip/pages/room_list_page.dart';
+import 'package:make_my_trip/pages/user_history_page.dart';
+import 'package:make_my_trip/widgets/history_list_view_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,9 +17,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home:
-      // LoginPage(),
-      //  HotelListPage(),
-       RoomListPage(),
+          // LoginPage(),
+          //  HotelListPage(),
+          //  RoomListPage(),
+      //    UserHistory(),
+      HistoryListViewWidget(),
     );
   }
 }

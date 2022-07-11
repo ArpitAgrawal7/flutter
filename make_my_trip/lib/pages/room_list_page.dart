@@ -7,21 +7,34 @@ class RoomListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: const Icon(Icons.arrow_back),
-        title: Row(
-
+        appBar: AppBar(
+          leading: const Icon(Icons.arrow_back),
+          title: Center(
+            child: Column(
+              children: const [
+                Text(
+                  "SELECT A ROOM",
+                  style: TextStyle(fontSize: 18),
+                ),
+                Text(
+                  "Hotel Name",
+                  style: TextStyle(fontSize: 16),
+                ),
+              ],
+            ),
+          ),
+          actions: const [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.0),
+              child: Icon(Icons.settings),
+            ),
+          ],
         ),
-        actions: const [
-          Icon(Icons.settings),
-        ],
-      ),
-      body: ListView.builder(
-        itemBuilder: (context, index) {
-          return const RoomListViewWidget();
-        },
-        itemCount: 6,
-      )
-    );
+        body: ListView.builder(
+          itemBuilder: (context, index) {
+            return const RoomListViewWidget();
+          },
+          itemCount: 6,
+        ));
   }
 }

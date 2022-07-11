@@ -10,7 +10,8 @@ class RoomListViewWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Padding(
-          padding: EdgeInsets.only(left:24.0,right: 24.0,top:16,bottom: 6.0),
+          padding:
+              EdgeInsets.only(left: 24.0, right: 24.0, top: 16, bottom: 6.0),
           child: Text(
             "Delux Room",
             style: TextStyle(
