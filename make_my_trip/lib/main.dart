@@ -19,9 +19,8 @@ class MyApp extends StatelessWidget {
       home:
           // LoginPage(),
           //  HotelListPage(),
-          //  RoomListPage(),
-      //    UserHistory(),
-      HistoryListViewWidget(),
+          RoomListPage(),
+      // UserHistory(),
     );
   }
 }

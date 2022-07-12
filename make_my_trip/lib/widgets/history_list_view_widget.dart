@@ -5,59 +5,119 @@ class HistoryListViewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView.builder(
-        shrinkWrap: true,
-        itemBuilder: (context, index) {
-          return Container(
-            height: 100,
-            width: double.infinity,
-            margin: EdgeInsets.symmetric(horizontal: 8.0),
-            child: Card(
-              child: ListTile(
-                leading: ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child:
-                      Image.asset("assets/images/hotel.png", fit: BoxFit.fill),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+      child: Card(
+        elevation: 4,
+        color: Colors.grey[200],
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.0),
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              flex: 2,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+                child: SizedBox(
+                  height: 100,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12.0),
+                    child: Image.asset("assets/images/hotel.png",
+                        fit: BoxFit.fill),
+                  ),
                 ),
-                title: const Text(
-                  "HOTEL OR TOUR NAME",
-                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
-                ),
-                subtitle: Column(
+              ),
+            ),
+            Expanded(
+              flex: 5,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    const Padding(
+                      padding: EdgeInsets.only(top: 12.0),
+                      child: Text(
+                        "HOTEL OR TOUR NAME",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500, fontSize: 16),
+                      ),
+                    ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: Row(
-                        children: const [
-                          Icon(
+                        children: [
+                          const Icon(
                             Icons.location_on,
                             size: 16,
                           ),
-                          Text("Location"),
+                          const Expanded(flex: 3, child: Text("Location")),
+                          const Spacer(),
+                          Expanded(
+                            flex: 2,
+                            child: Card(
+                              elevation: 2,
+                              color: Colors.blue,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(4.0),
+                              ),
+                              child: const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 4.0),
+                                child: Center(
+                                  child: Text(
+                                    "₹ 100000",
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
                     Row(
-                      children: const [
-                        Text("7 Days"),
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(4.0),
+                            border: Border.all(),
+                          ),
+                          child: const Padding(
+                            padding: EdgeInsets.all(4.0),
+                            child: Text("365 Days",
+                                style: TextStyle(
+                                    fontSize: 12, fontWeight: FontWeight.w400)),
+                          ),
+                        ),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Text("12 Jul,22 - 19JUl,22"),
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(4.0),
+                              border: Border.all(),
+                            ),
+                            child: const Padding(
+                              padding: EdgeInsets.all(4.0),
+                              child: Text(
+                                "12 Jul, 22 - 19JUl, 22",
+                                style: TextStyle(
+                                    fontSize: 12, fontWeight: FontWeight.w400),
+                              ),
+                            ),
+                          ),
                         ),
                       ],
                     ),
                   ],
                 ),
-                // trailing: Container(
-                //   color: Colors.blue,
-                //   child: const Text("₹ 100000"),
-                // ),
               ),
             ),
-          );
-        },
-        itemCount: 5,
+          ],
+        ),
       ),
     );
   }
