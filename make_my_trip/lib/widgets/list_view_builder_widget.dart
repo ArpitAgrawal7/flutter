@@ -69,7 +69,7 @@ class ListViewBuilderWidget extends StatelessWidget {
                 Expanded(
                   flex: 9,
                   child: Text(
-                    "ADDRESS ADRESS ADRESSS",
+                    "ADDRESS ADRESS ADRESSS nvfbjvfv jvlsovmlvvfp mvflv fpvofvl; vla pkpfklnvkf nbpfjbopmfl",
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,

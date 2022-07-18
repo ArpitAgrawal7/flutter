@@ -1,8 +1,10 @@
-import 'package:email_varification/home.dart';
-import 'package:email_varification/login%20page.dart';
+import 'dart:async';
+
+import 'package:email_varification/verify_cubit.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,8 +19,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginPage(),
-      // EmailVerification(),
+      home: BlocProvider<VerifyCubit>(
+        create: (context) => VerifyCubit(),
+        child: EmailVerification(),
+      ),
     );
   }
 }
@@ -32,24 +36,47 @@ class EmailVerification extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Form(
-          child: Column(
-            children: [
-              TextFormField(
-                controller: email,
-              ),
-              TextFormField(
-                controller: password,
-              ),
-              ElevatedButton(
-                  onPressed: () {
-                    signUp(
-                        email: email.text,
-                        password: password.text,
-                        context: context);
-                  },
-                  child: const Text("verify")),
-            ],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+          child: Form(
+            child: Column(
+              children: [
+                TextFormField(
+                  controller: email,
+                ),
+                TextFormField(
+                  controller: password,
+                ),
+                Align(
+                  alignment: AlignmentDirectional.centerEnd,
+                  child: TextButton(
+                    onPressed: () {
+                      context
+                          .read<VerifyCubit>()
+                          .resetPassword(email: email.text);
+                    },
+                    child: const Text("Forgot Password"),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton(
+                        onPressed: () {
+                          context.read<VerifyCubit>().signUp(
+                              email: email.text, password: password.text);
+                        },
+                        child: const Text("Sign Up")),
+                    ElevatedButton(
+                        onPressed: () {
+                          context.read<VerifyCubit>().signIn(
+                              email: email.text, password: password.text);
+                        },
+                        child: const Text("Login")),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -57,11 +84,9 @@ class EmailVerification extends StatelessWidget {
   }
 }
 
-Future signUp(
-    {required String email,
-    required String password,
-    required BuildContext context}) async {
-  final auth = FirebaseAuth.instance;
+final auth = FirebaseAuth.instance;
+
+Future signUp({required String email, required String password}) async {
   final User user;
   try {
     await auth.createUserWithEmailAndPassword(
@@ -71,18 +96,13 @@ Future signUp(
     user = auth.currentUser!;
     await user.sendEmailVerification();
     print("email send");
-    Future.delayed(const Duration(seconds: 20), () async {
+    Timer.periodic(const Duration(seconds: 5), (timer) async {
       await user.reload();
-      final myuser = auth.currentUser;
-      print(myuser!.emailVerified);
-      if (myuser.emailVerified) {
+      final myUser = auth.currentUser;
+      print(myUser!.emailVerified);
+      if (myUser.emailVerified) {
         print("verified");
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const Home()),
-        );
-      } else {
-        print("not verified");
+        timer.cancel();
       }
     });
   } on FirebaseAuthException {
@@ -90,3 +110,21 @@ Future signUp(
   }
 }
 // arpitagrawal976@gmail.com
+
+Future signIn({required String email, required String password}) async {
+  try {
+    await auth.signInWithEmailAndPassword(email: email, password: password);
+    print("sign IN");
+  } on FirebaseAuthException {
+    print('sign in error');
+  }
+}
+
+Future resetPassword({required String email}) async {
+  try {
+    await auth.sendPasswordResetEmail(email: email);
+    print('password reset email send');
+  } on FirebaseAuthException {
+    print('password error');
+  }
+}
