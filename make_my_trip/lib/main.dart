@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:make_my_trip/cubit/select_room_calculation_cubit.dart';
 import 'package:make_my_trip/pages/hotel_list_page.dart';
 import 'package:make_my_trip/pages/login_page.dart';
 import 'package:make_my_trip/pages/room_list_page.dart';
@@ -18,9 +20,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home:
           // LoginPage(),
-          //  HotelListPage(),
-          // RoomListPage(),
-          UserHistory(),
+          //   HotelListPage(),
+          BlocProvider<SelectRoomCalculationCubit>(
+        create: (context) => SelectRoomCalculationCubit(),
+        child: const RoomListPage(),
+      ),
+      // UserHistory(),
     );
   }
 }

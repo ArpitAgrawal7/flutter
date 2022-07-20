@@ -1,7 +1,32 @@
 import 'package:flutter/material.dart';
 
 class RoomListViewWidget extends StatelessWidget {
-  const RoomListViewWidget({Key? key}) : super(key: key);
+  const RoomListViewWidget(
+      {Key? key,
+      required this.roomType,
+      required this.roomDescription,
+      required this.onIncrementTap,
+      required this.onDecrementTap,
+      required this.roomPrice,
+      required this.roomImageUrl,
+      required this.roomFeature1,
+      required this.roomFeature2,
+      required this.roomFeature3,
+      required this.roomFeature4,
+      required this.totalRequiredRoom})
+      : super(key: key);
+
+  final String roomFeature1;
+  final String roomFeature2;
+  final String roomFeature3;
+  final String roomFeature4;
+  final int roomPrice;
+  final int totalRequiredRoom;
+  final String roomType;
+  final String roomImageUrl;
+  final String roomDescription;
+  final VoidCallback onIncrementTap;
+  final VoidCallback onDecrementTap;
 
   @override
   Widget build(BuildContext context) {
@@ -9,25 +34,26 @@ class RoomListViewWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding:
-              EdgeInsets.only(left: 24.0, right: 24.0, top: 16, bottom: 6.0),
+        Padding(
+          padding: const EdgeInsets.only(
+              left: 24.0, right: 24.0, top: 16, bottom: 6.0),
           child: Text(
-            "Delux Room",
-            style: TextStyle(
+            roomType,
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
           ),
         ),
         Row(
-          children: const [
+          children: [
             Expanded(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 6.0),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24.0, vertical: 6.0),
                 child: Text(
-                  "Description",
-                  style: TextStyle(
+                  roomDescription,
+                  style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
                   ),
@@ -47,7 +73,7 @@ class RoomListViewWidget extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: Image.asset(
-                      'assets/images/hotel.png',
+                      roomImageUrl,
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -60,7 +86,7 @@ class RoomListViewWidget extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: Image.asset(
-                      'assets/images/hotel.png',
+                      roomImageUrl,
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -72,31 +98,32 @@ class RoomListViewWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
           child: Row(
-            children: const [
-              Icon(
+            children: [
+              const Icon(
                 Icons.star,
                 size: 15,
               ),
               Expanded(
                   flex: 3,
                   child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 4.0),
+                    padding: const EdgeInsets.symmetric(vertical: 4.0),
                     child: Text(
-                      "70m'2",
-                      style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                      roomFeature1,
+                      style: const TextStyle(
+                          fontSize: 14, fontWeight: FontWeight.w600),
                     ),
                   )),
-              Spacer(),
-              Icon(
+              const Spacer(),
+              const Icon(
                 Icons.star,
                 size: 15,
               ),
               Expanded(
                   flex: 3,
                   child: Text(
-                    "Flat-screen TV",
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                    roomFeature2,
+                    style: const TextStyle(
+                        fontSize: 14, fontWeight: FontWeight.w600),
                   )),
             ],
           ),
@@ -104,27 +131,29 @@ class RoomListViewWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Row(
-            children: const [
-              Icon(
+            children: [
+              const Icon(
                 Icons.star,
                 size: 15,
               ),
               Expanded(
                   flex: 3,
                   child: Text(
-                    "Air Conditioning",
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                    roomFeature3,
+                    style: const TextStyle(
+                        fontSize: 14, fontWeight: FontWeight.w600),
                   )),
-              Spacer(),
-              Icon(
+              const Spacer(),
+              const Icon(
                 Icons.star,
                 size: 15,
               ),
               Expanded(
                   flex: 3,
                   child: Text(
-                    "Free Wifi",
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                    roomFeature4,
+                    style: const TextStyle(
+                        fontSize: 14, fontWeight: FontWeight.w600),
                   )),
             ],
           ),
@@ -150,17 +179,59 @@ class RoomListViewWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(8.0),
               color: Colors.grey[200],
             ),
-            child: Row(
-              children: [
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-                  child: Text("₹ 100000"),
-                ),
-                const Spacer(),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 8.0, vertical: 4.0),
-                  child: SizedBox(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Row(
+                children: [
+                  GestureDetector(
+                    onTap: onDecrementTap,
+                    child: Stack(
+                        alignment: AlignmentDirectional.center,
+                        children: const [
+                          Icon(
+                            Icons.square_rounded,
+                            size: 20,
+                            color: Colors.grey,
+                          ),
+                          Icon(
+                            Icons.remove,
+                            size: 15,
+                            color: Colors.white,
+                          ),
+                        ]),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                    child: Text(
+                      totalRequiredRoom.toString(),
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: onIncrementTap,
+                    child: Stack(
+                        alignment: AlignmentDirectional.center,
+                        children: const [
+                          Icon(
+                            Icons.square_rounded,
+                            size: 20,
+                            color: Colors.grey,
+                          ),
+                          Icon(
+                            Icons.add,
+                            size: 15,
+                            color: Colors.white,
+                          ),
+                        ]),
+                  ),
+                  const Spacer(),
+                  Text(
+                    "₹ $roomPrice p/night",
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  const Spacer(),
+                  SizedBox(
+                    height: 30,
                     child: ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
@@ -171,19 +242,19 @@ class RoomListViewWidget extends StatelessWidget {
                                 width: 1,
                               ))),
                       child: const Text(
-                        "SELECT",
+                        "Book",
                         style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
                             color: Colors.white),
                       ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           ),
-        )
+        ),
       ],
     );
   }

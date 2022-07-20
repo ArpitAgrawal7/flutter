@@ -8,7 +8,7 @@ class ListViewBuilderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(
-        borderRadius:  BorderRadius.circular(8.0),
+        borderRadius: BorderRadius.circular(8.0),
       ),
       child: Column(
         children: [
@@ -27,7 +27,8 @@ class ListViewBuilderWidget extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,7 +70,7 @@ class ListViewBuilderWidget extends StatelessWidget {
                 Expanded(
                   flex: 9,
                   child: Text(
-                    "ADDRESS ADRESS ADRESSS nvfbjvfv jvlsovmlvvfp mvflv fpvofvl; vla pkpfklnvkf nbpfjbopmfl",
+                    "ADDRESS ADRESS ADRESSS ",
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
