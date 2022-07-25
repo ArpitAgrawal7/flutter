@@ -11,33 +11,25 @@ class SelectRoomCalculationCubit extends Cubit<SelectRoomCalculationState> {
           semiDeluxValue: 0,
         ));
 
-  void superDeluxAddRoom(int superDeluxAdditionRoom) {
-    emit(state.copyWith(superDeluxValue: superDeluxAdditionRoom + 1));
-  }
-
-  void superDeluxRemoveRoom(int superDeluxSubstractionRoom) {
-    if (superDeluxSubstractionRoom > 0) {
-      emit(state.copyWith(superDeluxValue: superDeluxSubstractionRoom - 1));
+  void addRoomEvent(String roomType, int addRoomValue) {
+    if (roomType == 'Delux') {
+      emit(state.copyWith(deluxValue: addRoomValue + 1));
+    } else if (roomType == 'SemiDelux') {
+      emit(state.copyWith(semiDeluxValue: addRoomValue + 1));
+    } else {
+      emit(state.copyWith(superDeluxValue: addRoomValue + 1));
     }
   }
 
-  void deluxAddRoom(int deluxAdditionRoom) {
-    emit(state.copyWith(deluxValue: deluxAdditionRoom + 1));
-  }
-
-  void deluxRemoveRoom(int deluxSubstractionRoom) {
-    if (deluxSubstractionRoom > 0) {
-      emit(state.copyWith(deluxValue: deluxSubstractionRoom - 1));
-    }
-  }
-
-  void semiDeluxAddRoom(int semiDeluxAdditionRoom) {
-    emit(state.copyWith(semiDeluxValue: semiDeluxAdditionRoom + 1));
-  }
-
-  void semiDeluxRemoveRoom(int semiDeluxSubstractionRoom) {
-    if (semiDeluxSubstractionRoom > 0) {
-      emit(state.copyWith(semiDeluxValue: semiDeluxSubstractionRoom - 1));
+  void removeRoomEvent(String roomType, int removeRoomValue) {
+    if (removeRoomValue > 0) {
+      if (roomType == 'Delux') {
+        emit(state.copyWith(deluxValue: removeRoomValue - 1));
+      } else if (roomType == 'SemiDelux') {
+        emit(state.copyWith(semiDeluxValue: removeRoomValue - 1));
+      } else {
+        emit(state.copyWith(superDeluxValue: removeRoomValue - 1));
+      }
     }
   }
 }
